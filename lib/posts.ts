@@ -18,12 +18,12 @@ export async function getPostData(id) {
 
   return {
     id,
-    ...matterResult.data,
+    ...(matterResult.data as { data: string; title: string }),
     contentHtml,
   }
 }
 
-export function getSortedPostsData() {
+export const getSortedPostsData = () => {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory)
   const allPostsData = fileNames.map((fileName) => {
@@ -40,18 +40,12 @@ export function getSortedPostsData() {
     // Combine the data with the id
     return {
       id,
-      ...matterResult.data,
+      ...(matterResult.data as { data: string; title: string }),
     }
   })
   // Sort posts by date
-  return allPostsData.sort(({ date: a }, { date: b }) => {
-    if (a < b) {
-      return 1
-    } else if (a > b) {
-      return -1
-    } else {
-      return 0
-    }
+  return allPostsData.sort(({ a }, { b }) => {
+    return a.date < b.date ? 1 : -1
   })
 }
 
