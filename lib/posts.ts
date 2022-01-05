@@ -18,7 +18,7 @@ export async function getPostData(id) {
 
   return {
     id,
-    ...(matterResult.data as { data: string; title: string }),
+    ...(matterResult.data as { date: string; title: string }),
     contentHtml,
   }
 }
@@ -40,11 +40,11 @@ export const getSortedPostsData = () => {
     // Combine the data with the id
     return {
       id,
-      ...(matterResult.data as { data: string; title: string }),
+      ...(matterResult.data as { date: string; title: string }),
     }
   })
   // Sort posts by date
-  return allPostsData.sort(({ a }, { b }) => {
+  return allPostsData.sort((a, b) => {
     return a.date < b.date ? 1 : -1
   })
 }
