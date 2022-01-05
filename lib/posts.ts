@@ -44,9 +44,7 @@ export const getSortedPostsData = () => {
     }
   })
   // Sort posts by date
-  return allPostsData.sort((a, b) => {
-    return a.date < b.date ? 1 : -1
-  })
+  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1))
 }
 
 export function getAllPostIds() {
